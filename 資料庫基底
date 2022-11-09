@@ -1,0 +1,177 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- 主機： 127.0.0.1
+-- 產生時間： 2022-11-09 08:18:54
+-- 伺服器版本： 10.4.25-MariaDB
+-- PHP 版本： 8.1.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- 資料庫： `database`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `discountcoupon`
+--
+
+CREATE TABLE `discountcoupon` (
+  `couponId` varchar(20) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `userId` varchar(200) CHARACTER SET ucs2 COLLATE ucs2_unicode_ci NOT NULL,
+  `coupon` varchar(30) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `couponName` varchar(60) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `firm`
+--
+
+CREATE TABLE `firm` (
+  `firmId` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `firmPassword` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `firmName` varchar(150) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
+  `taxId` int(8) DEFAULT NULL,
+  `firmHeadName` varchar(150) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
+  `firmPhone` int(10) DEFAULT NULL,
+  `firmLocation` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
+  `firmEmail` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `item`
+--
+
+CREATE TABLE `item` (
+  `itemId` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemName` varchar(150) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemP` int(10) NOT NULL,
+  `itemInfo` varchar(9000) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemTitle` varchar(20) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemLocation` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemPeriod` varchar(40) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemNote` varchar(6000) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemTotalStar` int(10) DEFAULT NULL,
+  `itemFilter1` varchar(6) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemFilter2` varchar(9) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemFilter3` varchar(9) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemFilter4.` varchar(15) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `firmId` varchar(150) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemSales` int(100) NOT NULL,
+  `itemListedDate` date NOT NULL,
+  `itemInvent` int(10) NOT NULL,
+  `itemTraffic` varchar(600) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `itemimg`
+--
+
+CREATE TABLE `itemimg` (
+  `imgId` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemId` varchar(200) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemImgUrl` varchar(50) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemImgLead` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `ordertable`
+--
+
+CREATE TABLE `ordertable` (
+  `orderNumber` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `userId` varchar(200) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemId` varchar(200) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `orderReceipt` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `orderReview` varchar(1500) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
+  `orderStar` int(10) DEFAULT NULL,
+  `orderDate` date NOT NULL,
+  `orderQua` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `usertable`
+--
+
+CREATE TABLE `usertable` (
+  `userId` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `userPassword` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `userName` varchar(150) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
+  `useGender` varchar(5) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
+  `userBirthday` date DEFAULT NULL,
+  `userPhone` int(20) DEFAULT NULL,
+  `userEmail` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
+  `userPoint` int(100) DEFAULT NULL,
+  `userRegisterDate` date NOT NULL,
+  `userAvatar` varchar(200) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+
+--
+-- 已傾印資料表的索引
+--
+
+--
+-- 資料表索引 `discountcoupon`
+--
+ALTER TABLE `discountcoupon`
+  ADD PRIMARY KEY (`couponId`);
+
+--
+-- 資料表索引 `firm`
+--
+ALTER TABLE `firm`
+  ADD PRIMARY KEY (`firmId`);
+
+--
+-- 資料表索引 `item`
+--
+ALTER TABLE `item`
+  ADD PRIMARY KEY (`itemId`),
+  ADD KEY `firmId` (`firmId`);
+
+--
+-- 資料表索引 `itemimg`
+--
+ALTER TABLE `itemimg`
+  ADD PRIMARY KEY (`imgId`),
+  ADD KEY `itemId` (`itemId`);
+
+--
+-- 資料表索引 `ordertable`
+--
+ALTER TABLE `ordertable`
+  ADD PRIMARY KEY (`orderNumber`),
+  ADD KEY `userId` (`userId`),
+  ADD KEY `itemId` (`itemId`);
+
+--
+-- 資料表索引 `usertable`
+--
+ALTER TABLE `usertable`
+  ADD PRIMARY KEY (`userId`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
