@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2022-11-09 08:18:54
+-- 產生時間： 2022-11-13 10:46:49
 -- 伺服器版本： 10.4.25-MariaDB
 -- PHP 版本： 8.1.10
 
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `discountcoupon` (
-  `couponId` varchar(20) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `userId` varchar(200) CHARACTER SET ucs2 COLLATE ucs2_unicode_ci NOT NULL,
-  `coupon` varchar(30) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `couponName` varchar(60) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+  `couponId` varchar(10) COLLATE utf16_unicode_ci NOT NULL,
+  `userId` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `coupon` varchar(6) COLLATE utf16_unicode_ci NOT NULL,
+  `couponName` varchar(60) COLLATE utf16_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -41,15 +41,15 @@ CREATE TABLE `discountcoupon` (
 --
 
 CREATE TABLE `firm` (
-  `firmId` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `firmPassword` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `firmName` varchar(150) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
-  `taxId` int(8) DEFAULT NULL,
-  `firmHeadName` varchar(150) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
-  `firmPhone` int(10) DEFAULT NULL,
-  `firmLocation` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
-  `firmEmail` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+  `firmId` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `firmPassword` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `firmName` varchar(150) COLLATE utf16_unicode_ci NOT NULL,
+  `taxId` int(8) NOT NULL,
+  `firmHeadName` varchar(150) COLLATE utf16_unicode_ci NOT NULL,
+  `firmPhone` int(10) NOT NULL,
+  `firmLocation` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `firmEmail` varchar(50) COLLATE utf16_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -58,25 +58,25 @@ CREATE TABLE `firm` (
 --
 
 CREATE TABLE `item` (
-  `itemId` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemName` varchar(150) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemP` int(10) NOT NULL,
-  `itemInfo` varchar(9000) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemTitle` varchar(20) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemLocation` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemPeriod` varchar(40) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemNote` varchar(6000) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemTotalStar` int(10) DEFAULT NULL,
-  `itemFilter1` varchar(6) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemFilter2` varchar(9) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemFilter3` varchar(9) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemFilter4.` varchar(15) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `firmId` varchar(150) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemSales` int(100) NOT NULL,
+  `itemId` int(20) NOT NULL,
+  `firmId` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `itemName` varchar(200) COLLATE utf16_unicode_ci NOT NULL,
+  `itemPrice` int(5) NOT NULL,
+  `itemInfo` varchar(9000) COLLATE utf16_unicode_ci NOT NULL,
+  `itemTitle` varchar(90) COLLATE utf16_unicode_ci NOT NULL,
+  `itemLocation` varchar(150) COLLATE utf16_unicode_ci NOT NULL,
   `itemListedDate` date NOT NULL,
-  `itemInvent` int(10) NOT NULL,
-  `itemTraffic` varchar(600) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+  `itemPeriod` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `itemSales` int(5) NOT NULL,
+  `itemInvent` int(5) NOT NULL,
+  `itemNote` varchar(4800) COLLATE utf16_unicode_ci NOT NULL,
+  `itemTraffic` varchar(1500) COLLATE utf16_unicode_ci NOT NULL,
+  `itemTotalStar` int(3) NOT NULL,
+  `itemFilter1` varchar(9) COLLATE utf16_unicode_ci NOT NULL,
+  `itemFilter2` varchar(9) COLLATE utf16_unicode_ci NOT NULL,
+  `itemFilter3` varchar(9) COLLATE utf16_unicode_ci NOT NULL,
+  `itemFilter4` varchar(9) COLLATE utf16_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -85,11 +85,11 @@ CREATE TABLE `item` (
 --
 
 CREATE TABLE `itemimg` (
-  `imgId` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemId` varchar(200) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemImgUrl` varchar(50) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemImgLead` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+  `imgId` int(10) NOT NULL,
+  `itemId` int(20) NOT NULL,
+  `itemImgUrl` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `itemLead` varchar(100) COLLATE utf16_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -98,15 +98,15 @@ CREATE TABLE `itemimg` (
 --
 
 CREATE TABLE `ordertable` (
-  `orderNumber` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `userId` varchar(200) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemId` varchar(200) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `orderReceipt` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `orderReview` varchar(1500) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
-  `orderStar` int(10) DEFAULT NULL,
+  `orderNumber` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `userId` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `itemId` varchar(200) COLLATE utf16_unicode_ci NOT NULL,
+  `orderReceipt` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `orderReview` varchar(1500) COLLATE utf16_unicode_ci NOT NULL,
+  `orderStar` int(3) NOT NULL,
   `orderDate` date NOT NULL,
-  `orderQua` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+  `orderQua` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -115,17 +115,17 @@ CREATE TABLE `ordertable` (
 --
 
 CREATE TABLE `usertable` (
-  `userId` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `userPassword` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `userName` varchar(150) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
-  `useGender` varchar(5) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
-  `userBirthday` date DEFAULT NULL,
-  `userPhone` int(20) DEFAULT NULL,
-  `userEmail` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
-  `userPoint` int(100) DEFAULT NULL,
+  `userId` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `userPassword` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `userName` varchar(150) COLLATE utf16_unicode_ci NOT NULL,
+  `useGender` varchar(5) COLLATE utf16_unicode_ci NOT NULL,
+  `userBirthday` date NOT NULL,
+  `userPhone` int(10) NOT NULL,
+  `userEmail` varchar(50) COLLATE utf16_unicode_ci NOT NULL,
+  `userPoint` int(10) NOT NULL,
   `userRegisterDate` date NOT NULL,
-  `userAvatar` varchar(200) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+  `userAvatar` varchar(100) COLLATE utf16_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 --
 -- 已傾印資料表的索引
