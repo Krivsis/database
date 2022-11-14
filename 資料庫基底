@@ -60,10 +60,11 @@ CREATE TABLE `firm` (
 CREATE TABLE `item` (
   `itemId` int(20) NOT NULL,
   `firmId` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
-  `itemName` varchar(200) COLLATE utf16_unicode_ci NOT NULL,
+  `itemTitle` varchar(150) COLLATE utf16_unicode_ci NOT NULL,
   `itemPrice` int(5) NOT NULL,
+  `itemName` varchar(60) COLLATE utf16_unicode_ci NOT NULL,
   `itemInfo` varchar(9000) COLLATE utf16_unicode_ci NOT NULL,
-  `itemTitle` varchar(90) COLLATE utf16_unicode_ci NOT NULL,
+  `itemAddr` varchar(90) COLLATE utf16_unicode_ci NOT NULL,
   `itemLocation` varchar(150) COLLATE utf16_unicode_ci NOT NULL,
   `itemListedDate` date NOT NULL,
   `itemPeriod` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
