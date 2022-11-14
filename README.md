@@ -1,4 +1,6 @@
 # database
+資料庫放在資料裡
+<br />
 有資料的是databaseVer開頭的檔案
 <br />
 如果是要直接使用到Xampp，就把裡面的code直接貼到MySql指令裡
