@@ -82,6 +82,17 @@ CREATE TABLE `item` (
 -- --------------------------------------------------------
 
 --
+-- 資料表結構 `favTable`
+--
+
+CREATE TABLE `favTable` (
+  `favId` int(10) COLLATE utf16_unicode_ci NOT NULL,
+  `userId` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `itemId` int(20) COLLATE utf16_unicode_ci NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+-- --------------------------------------------------------
+--
 -- 資料表結構 `itemimg`
 --
 
