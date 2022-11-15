@@ -208,7 +208,8 @@ CREATE TABLE `ordertable` (
   `orderReview` varchar(1500) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
   `orderStar` int(10) DEFAULT NULL,
   `orderDate` date NOT NULL,
-  `orderQua` int(20) NOT NULL
+  `orderQua` int(20) NOT NULL,
+  `orderDeter` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
 
 -- --------------------------------------------------------
