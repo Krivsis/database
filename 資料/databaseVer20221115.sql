@@ -190,7 +190,7 @@ INSERT INTO `item` (`itemId`, `firmId`, `itemTitle`, `itemPrice`, `itemName`, `i
 CREATE TABLE `itemimg` (
   `imgId` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
   `itemId` varchar(200) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemImgUrl` varchar(50) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `itemImgUrl` varchar(300) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
   `itemImgLead` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
 
