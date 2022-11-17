@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2022-11-17 07:54:09
+-- 產生時間： 2022-11-17 07:55:11
 -- 伺服器版本： 10.4.25-MariaDB
 -- PHP 版本： 8.1.10
 
@@ -42,9 +42,9 @@ CREATE TABLE `discountcoupon` (
 
 CREATE TABLE `favtable` (
   `favId` int(10) NOT NULL,
-  `userId` varchar(30) COLLATE utf16_bin NOT NULL,
+  `userId` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
   `itemId` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 -- --------------------------------------------------------
 
