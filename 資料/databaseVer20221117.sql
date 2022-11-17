@@ -210,8 +210,8 @@ INSERT INTO `item` (`itemId`, `firmId`, `itemTitle`, `itemPrice`, `itemName`, `i
 CREATE TABLE `itemimg` (
   `imgId` int(10) NOT NULL,
   `itemId` int(20) NOT NULL,
-  `itemImgUrl` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
-  `itemLead` varchar(100) COLLATE utf16_unicode_ci NOT NULL
+  `itemImgUrl` varchar(300) COLLATE utf16_unicode_ci NOT NULL,
+  `itemLead` varchar(1) COLLATE utf16_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 --
