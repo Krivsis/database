@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2022-11-15 08:22:28
+-- 產生時間： 2022-11-17 07:57:07
 -- 伺服器版本： 10.4.25-MariaDB
 -- PHP 版本： 8.1.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫： `traveldatabase`
+-- 資料庫： `database`
 --
 
 -- --------------------------------------------------------
@@ -28,11 +28,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `discountcoupon` (
-  `couponId` varchar(20) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `userId` varchar(200) CHARACTER SET ucs2 COLLATE ucs2_unicode_ci NOT NULL,
-  `coupon` varchar(30) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `couponName` varchar(60) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+  `couponId` varchar(10) COLLATE utf16_unicode_ci NOT NULL,
+  `userId` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `coupon` varchar(6) COLLATE utf16_unicode_ci NOT NULL,
+  `couponName` varchar(60) COLLATE utf16_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+--
+-- 傾印資料表的資料 `discountcoupon`
+--
+
+INSERT INTO `discountcoupon` (`couponId`, `userId`, `coupon`, `couponName`) VALUES
+('1', 'u123456789', '100', '折價100元'),
+('2', 'u123456789', '0.9', '打9折');
 
 -- --------------------------------------------------------
 
@@ -42,9 +50,9 @@ CREATE TABLE `discountcoupon` (
 
 CREATE TABLE `favtable` (
   `favId` int(10) NOT NULL,
-  `userId` varchar(30) COLLATE utf16_bin NOT NULL,
+  `userId` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
   `itemId` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 --
 -- 傾印資料表的資料 `favtable`
@@ -63,15 +71,27 @@ INSERT INTO `favtable` (`favId`, `userId`, `itemId`) VALUES
 --
 
 CREATE TABLE `firm` (
-  `firmId` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `firmPassword` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `firmName` varchar(150) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
-  `taxId` int(8) DEFAULT NULL,
-  `firmHeadName` varchar(150) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
-  `firmPhone` int(10) DEFAULT NULL,
-  `firmLocation` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
-  `firmEmail` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+  `firmId` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `firmPassword` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `firmName` varchar(150) COLLATE utf16_unicode_ci NOT NULL,
+  `taxId` int(8) NOT NULL,
+  `firmHeadName` varchar(150) COLLATE utf16_unicode_ci NOT NULL,
+  `firmPhone` int(10) NOT NULL,
+  `firmLocation` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `firmEmail` varchar(50) COLLATE utf16_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+--
+-- 傾印資料表的資料 `firm`
+--
+
+INSERT INTO `firm` (`firmId`, `firmPassword`, `firmName`, `taxId`, `firmHeadName`, `firmPhone`, `firmLocation`, `firmEmail`) VALUES
+('firm001', 'f000000', '台忠旅行社', 12345678, '王台中', 912345678, ' 新北市汐止區新台五路一段95號16樓之12號', 'f123456@mail.com'),
+('firm002', 'f222222', '台南旅行社', 22222222, '王台南', 922222222, '嘉義市東區興美三街28號', 'f222222@mail.com'),
+('firm003', 'k000000', '台北旅行社', 12345679, '王台北', 912345698, '高雄市大寮區永仁街33號', 'f21112@mail.com'),
+('firm004', 'k1111111', '台新旅行社', 12345698, '王台新', 965498721, '彰化縣彰化市彰秀路8號', 'f236522@mail.com'),
+('firm005', 'c1111111', '高雄旅行社', 12345678, '王高雄', 985423156, ' 苗栗縣苗栗市橫車路21號', 'k54689@mail.com'),
+('firm006', 'p1111111', '台中旅行社', 12345678, '王台中', 996521784, '宜蘭縣五結鄉錦草一路7號', 'f22659@mail.com');
 
 -- --------------------------------------------------------
 
@@ -93,7 +113,7 @@ CREATE TABLE `item` (
   `itemSales` int(5) NOT NULL,
   `itemInvent` int(5) NOT NULL,
   `itemNote` varchar(4800) COLLATE utf16_unicode_ci NOT NULL,
-  `itemTraffic` varchar(1500) COLLATE utf16_unicode_ci DEFAULT NULL,
+  `itemTraffic` varchar(1500) COLLATE utf16_unicode_ci NOT NULL,
   `itemTotalStar` int(3) NOT NULL,
   `itemFilter1` varchar(9) COLLATE utf16_unicode_ci NOT NULL,
   `itemFilter2` varchar(9) COLLATE utf16_unicode_ci NOT NULL,
@@ -188,11 +208,237 @@ INSERT INTO `item` (`itemId`, `firmId`, `itemTitle`, `itemPrice`, `itemName`, `i
 --
 
 CREATE TABLE `itemimg` (
-  `imgId` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemId` varchar(200) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemImgUrl` varchar(300) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemImgLead` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+  `imgId` int(10) NOT NULL,
+  `itemId` int(20) NOT NULL,
+  `itemImgUrl` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `itemLead` varchar(100) COLLATE utf16_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+--
+-- 傾印資料表的資料 `itemimg`
+--
+
+INSERT INTO `itemimg` (`imgId`, `itemId`, `itemImgUrl`, `itemLead`) VALUES
+(1, 1, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_125748/20220103071938_8TSLy/', '1'),
+(2, 1, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_125748/20220103072034_52N0o/', '2'),
+(3, 1, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_125748/20220103072034_52N0o/', '3'),
+(4, 2, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_6370/20220825082844_0RZJ4/jp', '1'),
+(5, 2, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_6370/20221013063654_JempZ/jp', '2'),
+(6, 2, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_6370/20220122023741_mzHTa/jp', '3'),
+(7, 3, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23741/20210205021022_6S7c8/j', '1'),
+(8, 3, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23741/20211203134029_0gkus/j', '2'),
+(9, 3, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23741/20211203134028_bt2PH/j', '3'),
+(10, 4, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102318/20200921061603_9zWLY/', '1'),
+(11, 4, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102318/20200921061945_zlMJv/', '2'),
+(12, 4, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102318/20200921061614_9VUZM/', '3'),
+(13, 5, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_19847/20180830072340_7hUi5/j', '1'),
+(14, 5, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_19847/20180830072509_JQuGQ/j', '2'),
+(15, 5, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_19847/20180830051228_vWnwW/j', '3'),
+(16, 6, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102949/20210218021904_lgIoD/', '1'),
+(17, 6, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102949/20210218021903_swE3j/', '2'),
+(18, 6, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102949/20200826084553_Bz3d7/', '3'),
+(19, 7, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_124246/20211118075747_OYw1Q/', '1'),
+(20, 7, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_124246/20211123072113_kQzaj/', '2'),
+(21, 7, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_124246/20211123072128_f0dFw/', '3'),
+(22, 8, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23286/20200720062659_kaNjA/j', '1'),
+(23, 8, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23286/20210331100518_roEY7/j', '2'),
+(24, 8, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23286/20210331100518_roEY7/j', '3'),
+(25, 9, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_116425/20210309034856_8EDSu/', '1'),
+(26, 9, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_116425/20210309034854_j2yp4/', '2'),
+(27, 9, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_116425/20210309034854_oWQnR/', '3'),
+(28, 10, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_118919/20210419072801_cxacU/', '1'),
+(29, 10, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_118919/20210419072720_Aaj7G/', '2'),
+(30, 10, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_118919/20210419072800_fjDqY/', '3'),
+(31, 11, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_116949/20210407135033_a5Mtp/', '1'),
+(32, 11, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_116949/20210407135348_Fm8cw/', '2'),
+(33, 11, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_116949/20210325073313_Ipsoa/', '3'),
+(34, 12, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_123118/20210923082907_q5z4b/', '1'),
+(35, 12, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_123118/20210923082929_niD6O/', '2'),
+(36, 12, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_123118/20210923082934_POcNA/', '3'),
+(37, 13, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23638/20201030043907_e27eK/j', '1'),
+(38, 13, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23638/20201030043906_CRiUo/j', '2'),
+(39, 13, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23638/20201030043905_3W4w2/j', '3'),
+(40, 14, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23643/20190502095524_zqzyz/j', '1'),
+(41, 14, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23643/20190502095510_SOT4g/j', '2'),
+(42, 14, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23643/20190502095510_SOT4g/j', '3'),
+(43, 15, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_105727/20210407071718_4hS9P/', '1'),
+(44, 15, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_105727/20201120060013_lAlBb/', '2'),
+(45, 15, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_105727/20210407071717_YSs98/', '3'),
+(46, 16, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102467/20200923092342_se7jx/', '1'),
+(47, 16, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102467/20200812061353_N297w/', '2'),
+(48, 16, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102467/20200812061310_5Ry2A/', '3'),
+(49, 17, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_122019/20210812102656_bwTBF/', '1'),
+(50, 17, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_122019/20210812082455_8fNHl/', '2'),
+(51, 17, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_122019/20210812081247_x0LdY/', '3'),
+(52, 18, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_113778/20220406095820_VPpaO/', '1'),
+(53, 18, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_113778/20211001102545_X0nkq/', '2'),
+(54, 18, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_113778/20211001102548_ZDUFw/', '3'),
+(55, 19, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100467/20200526023453_uxMdW/', '1'),
+(56, 19, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100467/20200526023456_ebs2f/', '2'),
+(57, 19, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100467/20200526023453_uxMdW/', '3'),
+(58, 20, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_31476/20201118034424_gLf27/j', '1'),
+(59, 20, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_31476/20201118034426_owpzw/j', '2'),
+(60, 20, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_31476/20201028033806_HbAEu/j', '3'),
+(61, 21, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_104627/20201028040608_48ryk/', '1'),
+(62, 21, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_104627/20201028040608_Qov9M/', '2'),
+(63, 21, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_104627/20201028040609_QMcaX/', '3'),
+(64, 22, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_123265/20220103075250_0CFTW/', '1'),
+(65, 22, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_123265/20220103075249_nHoRi/', '2'),
+(66, 22, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_123265/20220103075248_e0u5v/', '3'),
+(67, 23, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_116861/20210323034401_GRUV0/', '1'),
+(68, 23, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_116861/20210323034402_B4do1/', '2'),
+(69, 23, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_116861/20210323034403_coLsV/', '3'),
+(70, 24, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102247/20221102075909_jblDd/', '1'),
+(71, 24, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102247/20200806040919_6CbYw/', '2'),
+(72, 24, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102247/20200806041027_0WfNG/', '3'),
+(73, 25, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_9468/20190225091057_q1e4v/jp', '1'),
+(74, 25, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_9468/20221103062335_9pFtj/jp', '2'),
+(75, 25, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_9468/20221028053422_yEXSC/jp', '3'),
+(76, 26, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_129507/20220517052323_5Gdi3/', '1'),
+(77, 26, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_129507/20220517035625_zJFUv/', '2'),
+(78, 26, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_129507/20220517035621_nxz28/', '3'),
+(79, 27, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_13338/20171108080341_Zx2xp/j', '1'),
+(80, 27, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_13338/20171108075854_KMars/j', '2'),
+(81, 27, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_13338/20171108075925_dp1u8/j', '3'),
+(82, 28, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_134707/20221020082521_ZJGNt/', '1'),
+(83, 28, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_134707/20221020082522_S1mB3/', '2'),
+(84, 28, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_134707/20221020082645_Nd3pS/', '3'),
+(85, 29, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_129556/20220518035137_8YVjv/', '1'),
+(86, 29, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_129556/20220518034042_nmHlr/', '2'),
+(87, 29, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_129556/20220518035135_YvTTh/', '3'),
+(88, 30, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100527/20200529074002_SNYYK/', '1'),
+(89, 30, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100527/20200527080901_ruHOp/', '2'),
+(90, 30, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100527/20200527080926_MQUB6/', '3'),
+(91, 31, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100025/20210423113719_FLdJK/', '1'),
+(92, 31, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100025/20200708081055_RUf53/', '2'),
+(93, 31, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100025/20210423113712_1WRll/', '3'),
+(94, 32, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_128591/20220425042434_xs9Oj/', '1'),
+(95, 32, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_128591/20220429061710_EH6gR/', '2'),
+(96, 32, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_128591/20220429061709_szgGK/', '3'),
+(97, 33, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_21264/20210217074116_3XOtH/j', '1'),
+(98, 33, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_21264/20211229103310_I8ITH/j', '2'),
+(99, 33, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_21264/20190117100343_ZJmnT/j', '3'),
+(100, 34, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_128192/20220416123223_KrCpD/', '1'),
+(101, 34, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_128192/20220416123224_6Z7hx/', '2'),
+(102, 34, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_128192/20220416123219_glp9w/', '3'),
+(103, 35, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23729/20220111015504_KybkW/j', '1'),
+(104, 35, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23729/20220111015732_smtzm/j', '2'),
+(105, 35, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23729/20220111015502_ZRVPL/j', '3'),
+(106, 36, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_121622/20210810073425_hLVS7/', '1'),
+(107, 36, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_121622/20210810073422_9ySlY/', '2'),
+(108, 36, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_121622/20210810073427_QWIZW/', '3'),
+(109, 37, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_28828/20220118032217_LJVbr/j', '1'),
+(110, 37, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_28828/20220118032219_BmsSQ/j', '2'),
+(111, 37, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_28828/20220118032222_fbTA7/j', '3'),
+(112, 38, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_116636/20210316080728_p9fEI/', '1'),
+(113, 38, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_116636/20220921111345_cqkKv/', '2'),
+(114, 38, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_116636/20220921111350_YtObE/', '3'),
+(115, 39, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_101875/20200724065807_jT7L6/', '1'),
+(116, 39, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_101875/20200724065906_fxcgD/', '2'),
+(117, 39, 'https://cc.tvbs.com.tw/img/program/upload/2022/01/25/20220125142913-64354b2c.jpg', '3'),
+(118, 40, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_101875/20200724065807_jT7L6/', '1'),
+(119, 40, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_101875/20200724065906_fxcgD/', '2'),
+(120, 40, 'https://cc.tvbs.com.tw/img/program/upload/2022/01/25/20220125142913-64354b2c.jpg', '3'),
+(121, 41, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_127119/20220429083811_AeERq/', '1'),
+(122, 41, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_127119/20220222054622_Ey37C/', '2'),
+(123, 41, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_127119/20220222054950_WnnDJ/', '3'),
+(124, 42, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_8189/20161021032150_fLYWu/jp', '1'),
+(125, 42, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_8189/20220502102707_30sqm/jp', '2'),
+(126, 42, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_8189/20160524044109_cj1hO/pn', '3'),
+(127, 43, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100554/20200528092356_cxC9b/', '1'),
+(128, 43, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100554/20200528092358_7JQoW/', '2'),
+(129, 43, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100554/20200528092354_8B5Wy/', '3'),
+(130, 44, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_118196/20210409055043_fjwM2/', '1'),
+(131, 44, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_118196/20210409055043_eGyBx/', '2'),
+(132, 44, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_118196/20210409063018_rgqV0/', '3'),
+(133, 45, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_135269/20221102031227_0MhOT/', '1'),
+(134, 45, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_135269/20221102031228_zR446/', '2'),
+(135, 45, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_135269/20221102031230_Y5R2z/', '3'),
+(136, 46, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100557/20200528103309_j2ywg/', '1'),
+(137, 46, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100557/20200528103642_ZSaHz/', '2'),
+(138, 46, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100557/20200528103339_VfEmu/', '3'),
+(139, 47, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_129447/20220517145024_qRO0k/', '1'),
+(140, 47, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_129447/20220517145036_veiQp/', '2'),
+(141, 47, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_129447/20220517145029_Mj2mG/', '3'),
+(142, 48, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_128176/20220401054425_MIMYe/', '1'),
+(143, 48, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_128176/20220401054423_gBl4d/', '2'),
+(144, 48, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_128176/20220401055231_x5XrO/', '3'),
+(145, 49, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_122460/20210820044401_CRylD/', '1'),
+(146, 49, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_122460/20210820044359_i0bVu/', '2'),
+(147, 49, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_122460/20210820044403_5lpKM/', '3'),
+(148, 50, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_101861/20200724030239_hmkn4/', '1'),
+(149, 50, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_101861/20200724030244_UEpZr/', '2'),
+(150, 50, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_101861/20200724030246_uKudi/', '3'),
+(151, 51, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_34005/20191120093944_aDyRw/j', '1'),
+(152, 51, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_34005/20191120093954_eaRxE/j', '2'),
+(153, 51, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_34005/20191120093957_3Zjnb/j', '3'),
+(154, 52, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_128162/20220330061146_BJ3PW/', '1'),
+(155, 52, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_128162/20220330061146_esDzA/', '2'),
+(156, 52, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_128162/20220330061146_J9XHw/', '3'),
+(157, 53, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_122762/20210903101144_yqzkr/', '1'),
+(158, 53, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_122762/20210928090417_SGpju/', '2'),
+(159, 53, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_122762/20210903055820_pDQXI/', '3'),
+(160, 54, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_119292/20221017034824_ZKcOW/', '1'),
+(161, 54, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_119292/20210504053117_yQZd9/', '2'),
+(162, 54, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_119292/20210504052719_PWKUc/', '3'),
+(163, 55, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_131511/20220725063723_vmLbM/', '1'),
+(164, 55, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_131511/20220725063720_CdJOp/', '2'),
+(165, 55, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_131511/20220725063910_AjBxt/', '3'),
+(166, 56, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_116315/20210903082804_1G5Pj/', '1'),
+(167, 56, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_116315/20210903101509_i3lCk/', '2'),
+(168, 56, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_116315/20210903082800_jO4d2/', '3'),
+(169, 57, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_114053/20201208082138_GFT3c/', '1'),
+(170, 57, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_114053/20201208082135_KAM5r/', '2'),
+(171, 57, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_114053/20201208082136_LwbIo/', '3'),
+(172, 58, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102722/20201103041138_PQCLN/', '1'),
+(173, 58, '\"https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102722/20201103041137_z1W21', '2'),
+(174, 58, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102722/20201103041140_JS38R/', '3'),
+(175, 59, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_101587/20220609112551_Q7Xog/', '1'),
+(176, 59, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_101587/20220609112551_Aql2J/', '2'),
+(177, 59, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_101587/20220609112552_nUDQf/', '3'),
+(178, 60, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_32341/20191016112122_NDArl/j', '1'),
+(179, 60, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_32341/20211225110240_FbFuX/j', '2'),
+(180, 60, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_32341/20191017170307_XGUwQ/j', '3'),
+(181, 61, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_103382/20200910064319_lfRyf/', '1'),
+(182, 61, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_103382/20200910064323_PYF9c/', '2'),
+(183, 61, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_103382/20200910064320_UVSJ3/', '3'),
+(184, 62, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_126349/20220125032349_B0sxM/', '1'),
+(185, 62, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_126349/20220125032318_Dgk4v/', '2'),
+(186, 62, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_126349/20220125032318_GdndD/', '3'),
+(187, 63, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102359/20200810024507_wrlwT/', '1'),
+(188, 63, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102359/20200810024510_ZHS9g/', '2'),
+(189, 63, 'https://misshuan.tw/wp-content/uploads/20200507172000_13.jpg', '3'),
+(190, 64, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_114010/20201207081646_mMRPr/', '1'),
+(191, 64, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_114010/20201207081650_DB69p/', '2'),
+(192, 64, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_114010/20201207081658_PuWHt/', '3'),
+(193, 65, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_131137/20220713015036_G8zqo/', '1'),
+(194, 65, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_131137/20220713015038_sz2lA/', '2'),
+(195, 65, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_131137/20220713020852_OOJQg/', '3'),
+(196, 66, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_30368/20190926041640_mi1oi/j', '1'),
+(197, 66, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_30368/20190906083316_s5GkD/j', '2'),
+(198, 66, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_30368/20190906083506_9k8RU/j', '3'),
+(199, 67, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102051/20200804080441_joc9R/', '1'),
+(200, 67, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102051/20200804022856_uUhST/', '2'),
+(201, 67, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_102051/20200804022935_nYL5Z/', '3'),
+(202, 68, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_28087/20190902035539_101vg/j', '1'),
+(203, 68, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_28087/20190902035602_26fh5/j', '2'),
+(204, 68, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_28087/20190902035620_OhK7s/j', '3'),
+(205, 69, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_127033/20220331090947_9u3NN/', '1'),
+(206, 69, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_127033/20220218105917_62UZs/', '2'),
+(207, 69, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_127033/20220331083946_H5UR1/', '3'),
+(208, 70, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23472/20190425045559_H101R/j', '1'),
+(209, 70, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23472/20190425045405_hN7Sx/j', '2'),
+(210, 70, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_23472/20190507083720_AJvbW/j', '3'),
+(211, 71, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_126847/20220222092656_gD1WY/', '1'),
+(212, 72, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_124037/20211110063628_iBj3i/', '1'),
+(213, 72, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_124037/20211110063627_KpPb9/', '2'),
+(214, 72, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_124037/20211110063617_6U3ua/', '3'),
+(215, 73, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_127060/20220223011314_eVk6p/', '1'),
+(216, 73, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_127060/20220223011427_4pAaK/', '2'),
+(217, 73, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_127060/20220223011315_HyOQI/', '3'),
+(218, 74, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_123973/20211109063113_iizfB/', '1'),
+(219, 74, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_123973/20211109063133_Bv3T9/', '2'),
+(220, 74, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_123973/20211109063134_klNGr/', '3');
 
 -- --------------------------------------------------------
 
@@ -201,16 +447,24 @@ CREATE TABLE `itemimg` (
 --
 
 CREATE TABLE `ordertable` (
-  `orderNumber` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `userId` varchar(200) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `itemId` varchar(200) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `orderReceipt` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `orderReview` varchar(1500) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
-  `orderStar` int(10) DEFAULT NULL,
+  `orderNumber` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `userId` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `itemId` varchar(200) COLLATE utf16_unicode_ci NOT NULL,
+  `orderReceipt` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `orderReview` varchar(1500) COLLATE utf16_unicode_ci NOT NULL,
+  `orderStar` int(3) NOT NULL,
   `orderDate` date NOT NULL,
-  `orderQua` int(20) NOT NULL,
+  `orderQua` int(10) NOT NULL,
   `orderDeter` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+--
+-- 傾印資料表的資料 `ordertable`
+--
+
+INSERT INTO `ordertable` (`orderNumber`, `userId`, `itemId`, `orderReceipt`, `orderReview`, `orderStar`, `orderDate`, `orderQua`, `orderDeter`) VALUES
+('1', 'u123456789', '1', 'order00001', '一個小巧精緻的水族館，主題連接流暢，設計十分精巧。', 5, '2022-11-17', 3, 1),
+('2', 'u223456789', '1', 'order00002', '最好在工作日去。因為周末這個地方會太擁擠。', 3, '2022-11-25', 6, 2);
 
 -- --------------------------------------------------------
 
@@ -219,17 +473,25 @@ CREATE TABLE `ordertable` (
 --
 
 CREATE TABLE `usertable` (
-  `userId` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `userPassword` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `userName` varchar(150) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
-  `useGender` varchar(5) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
-  `userBirthday` date DEFAULT NULL,
-  `userPhone` int(20) DEFAULT NULL,
-  `userEmail` varchar(100) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
-  `userPoint` int(100) DEFAULT NULL,
+  `userId` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `userPassword` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
+  `userName` varchar(150) COLLATE utf16_unicode_ci NOT NULL,
+  `useGender` varchar(5) COLLATE utf16_unicode_ci NOT NULL,
+  `userBirthday` date NOT NULL,
+  `userPhone` int(10) NOT NULL,
+  `userEmail` varchar(50) COLLATE utf16_unicode_ci NOT NULL,
+  `userPoint` int(10) NOT NULL,
   `userRegisterDate` date NOT NULL,
-  `userAvatar` varchar(200) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+  `userAvatar` varchar(100) COLLATE utf16_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+--
+-- 傾印資料表的資料 `usertable`
+--
+
+INSERT INTO `usertable` (`userId`, `userPassword`, `userName`, `useGender`, `userBirthday`, `userPhone`, `userEmail`, `userPoint`, `userRegisterDate`, `userAvatar`) VALUES
+('u123456789', 'u111111111', '王大明', '男', '2000-01-01', 912345678, 'won@mail.com', 999, '2010-01-01', 'https://cdn-icons-png.flaticon.com/512/147/147142.png'),
+('u223456789', 'u111111112', '李小明', '男', '2000-01-06', 912345665, 'lin@mail.com', 999, '2020-05-06', 'https://cdn-icons-png.flaticon.com/512/147/147142.png');
 
 --
 -- 已傾印資料表的索引
@@ -254,6 +516,13 @@ ALTER TABLE `favtable`
 --
 ALTER TABLE `firm`
   ADD PRIMARY KEY (`firmId`);
+
+--
+-- 資料表索引 `item`
+--
+ALTER TABLE `item`
+  ADD PRIMARY KEY (`itemId`),
+  ADD KEY `firmId` (`firmId`);
 
 --
 -- 資料表索引 `itemimg`
