@@ -354,7 +354,7 @@ INSERT INTO `itemimg` (`imgId`, `itemId`, `itemImgUrl`, `itemLead`) VALUES
 (133, 45, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_135269/20221102031227_0MhOT/jpg', '1'),
 (134, 45, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_135269/20221102031228_zR446/jpg', '2'),
 (135, 45, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_135269/20221102031230_Y5R2z/jpg', '3'),
-(136, 46, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100557/20200528103309_j2ywg/jpg\"', '1'),
+(136, 46, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100557/20200528103309_j2ywg/jpg\', '1'),
 (137, 46, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100557/20200528103642_ZSaHz/png', '2'),
 (138, 46, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_100557/20200528103339_VfEmu/jpg', '3'),
 (139, 47, 'https://image.kkday.com/v2/image/get/h_650%2Cc_fit/s1.kkday.com/product_129447/20220517145024_qRO0k/jpg', '1'),
