@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2022-11-18 04:08:11
+-- 產生時間： 2022-11-23 13:05:38
 -- 伺服器版本： 10.4.25-MariaDB
 -- PHP 版本： 8.1.10
 
@@ -444,7 +444,7 @@ INSERT INTO `itemimg` (`imgId`, `itemId`, `itemImgUrl`, `itemLead`) VALUES
 --
 
 CREATE TABLE `ordertable` (
-  `orderNumber` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
+  `orderNumber` varchar(10) COLLATE utf16_unicode_ci NOT NULL,
   `userId` varchar(30) COLLATE utf16_unicode_ci NOT NULL,
   `itemId` varchar(200) COLLATE utf16_unicode_ci NOT NULL,
   `orderReceipt` varchar(100) COLLATE utf16_unicode_ci NOT NULL,
